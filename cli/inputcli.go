@@ -1,6 +1,7 @@
 package cli
 
 import (
+	"Alien-Invasion/cmd"
 	"errors"
 	"flag"
 	"fmt"
@@ -15,7 +16,7 @@ var (
 const (
 	_aliens        int = 10    // using 10 Aleins if not specified
 	_itterations   int = 10000 // using 10000 itterations as specified (or) could input yours if required
-	_cityTxtFile       = "./test/"
+	_cityTxtFile       = "./test/ex.txt"
 	_alienNameFile     = "./test/"
 )
 
@@ -30,6 +31,14 @@ func Execute() {
 		//writng logic for taking the files input then mapping into the world simulation
 			//take the input from the file, parse it --> parse the map, (Like connecting the nodes)
 			// build the city with nodes, connecting Noth, East, West, South
+	*/
+	world, inputfile, err := cmd.ReadAndMakeWorldMap(_cityTxtFile)
+	if err != nil {
+		//add error handling
+	}
+	fmt.Println(world)
+	fmt.Println(inputfile)
+	/*
 
 		// writing a logic for building a simulatior
 			//use random from to create itterations both random numbers and random alines
@@ -45,6 +54,7 @@ func Execute() {
 
 		//print the city remainig
 	*/
+
 }
 
 func init() {
