@@ -7,18 +7,6 @@ import (
 	"strings"
 )
 
-var _directions = map[string]string{
-	"north": "south",
-	"south": "north",
-	"east":  "west",
-	"west":  "east",
-}
-
-type (
-	_cityTxtFile []*City //putting city in a array/ list
-	_world       map[string]*City
-)
-
 func ReadAndMakeWorldMap(file string) (_world, _cityTxtFile, error) {
 
 	readableFile, err := os.Open(file)

@@ -26,23 +26,34 @@ func Execute() {
 		fmt.Println("Error while checking flags: %s\n", err)
 		os.Exit(1)
 	}
-	/*
-		//PLAN : -
-		//writng logic for taking the files input then mapping into the world simulation
-			//take the input from the file, parse it --> parse the map, (Like connecting the nodes)
-			// build the city with nodes, connecting Noth, East, West, South
-	*/
-	world, inputfile, err := cmd.ReadAndMakeWorldMap(_cityTxtFile)
+
+	//writng logic for taking the files input then mapping into the world simulation
+	//take the input from the file, parse it --> parse the map, (Like connecting the nodes)
+	// build the city with nodes, connecting Noth, East, West, South
+
+	createdWorld, inputfile, err := cmd.ReadAndMakeWorldMap(_cityTxtFile)
 	if err != nil {
-		//add error handling
+		fmt.Errorf("Error while reading city Input File ", err)
+		os.Exit(1)
 	}
-	fmt.Println(world)
+	// writing a logic for building a simulatior
+	//use random from to create itterations both random numbers and random alines
+
+	CreateAttackingAliens := cmd.CreateAttackingAliens()
+	attackingAliens := cmd.CreateRandomAliens(_numberOfAliens, CreateAttackingAliens)
+
+	if _alienNameFile != "" {
+		if err := cmd.NameAliensFromFile(attackingAliens, _alienNameFile); err != nil {
+			fmt.Errorf("Error while reading alien Input File ", err)
+			os.Exit(1)
+		}
+	}
+
+	startSimulation := cmd.IntiateNewSimulation(CreateAttackingAliens, _iterationsInput, createdWorld, attackingAliens)
+
 	fmt.Println(inputfile)
+	fmt.Println(startSimulation)
 	/*
-
-		// writing a logic for building a simulatior
-			//use random from to create itterations both random numbers and random alines
-
 		//run the simultion
 			//create a loop for itteration
 			//make the alines shuffle

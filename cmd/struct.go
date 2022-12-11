@@ -1,5 +1,7 @@
 package cmd
 
+import "math/rand"
+
 type City struct {
 	Node
 	RoadsName map[string]string
@@ -16,4 +18,24 @@ type Node struct {
 type Link struct {
 	Key   string
 	Nodes []string
+}
+
+type Status struct {
+	Name  string
+	Flags map[string]bool
+	Node  *Node
+}
+
+type Alien struct {
+	Status
+	city *City
+}
+
+type Simulation struct {
+	R            *rand.Rand
+	Iteration    int
+	EndIteration int
+	_world
+	_aliens
+	_defense
 }
