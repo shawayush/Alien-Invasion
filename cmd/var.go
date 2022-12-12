@@ -7,7 +7,15 @@ var _directions = map[string]string{
 	"west":  "east",
 }
 
-const _numberOfRandonAlien int = 10
+const (
+	_numberOfRandonAlien int               = 10
+	_dead                string            = "dead"
+	_deadAlien           AlienMovingStatus = iota
+	_alienTrapped
+	_cityDistroyed
+	_destroyed string = "destroyed"
+	_operation string = "stopped"
+)
 
 type (
 	_occupation map[string]*Alien
@@ -19,4 +27,8 @@ type (
 	_world map[string]*City
 
 	_aliens []*Alien
+
+	_alien = Alien
+
+	_city = City
 )

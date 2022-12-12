@@ -7,11 +7,11 @@ type City struct {
 	RoadsName map[string]string
 }
 
-//TODO : Needs to build a flag which can say that survived or not during the invasion
 type Node struct {
 	Name  string
 	Links []*Link
 	Nodes map[string]*Node
+	Flags map[string]bool
 }
 
 //Represents the connection between the node used above
@@ -38,4 +38,10 @@ type Simulation struct {
 	_world
 	_aliens
 	_defense
+}
+
+type AlienMovingStatus uint8
+
+type AlienMovingStatusError struct {
+	reason AlienMovingStatus
 }

@@ -23,7 +23,7 @@ const (
 func Execute() {
 
 	if err := CheckCliInputs(); err != nil {
-		fmt.Println("Error while checking flags: %s\n", err)
+		fmt.Errorf("Error while checking flags: %s\n", err)
 		os.Exit(1)
 	}
 
@@ -51,8 +51,6 @@ func Execute() {
 
 	startSimulation := cmd.IntiateNewSimulation(CreateAttackingAliens, _iterationsInput, createdWorld, attackingAliens)
 
-	fmt.Println(inputfile)
-	fmt.Println(startSimulation)
 	/*
 		//run the simultion
 			//create a loop for itteration
@@ -63,9 +61,15 @@ func Execute() {
 				//add a checker if the simulation completes before
 				//
 
-		//print the city remainig
+
 	*/
 
+	if err := startSimulation.RunSimulation(); err != nil {
+		fmt.Println("Error while running simulation: ", err)
+	}
+
+	//print the city remainig
+	fmt.Println(inputfile)
 }
 
 func init() {
