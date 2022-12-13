@@ -34,6 +34,8 @@ func (sim *Simulation) RunSimulation() error {
 	return nil
 }
 
+// Remix the array for the attack whenever a alien is attacking and after itterations
+//TO DO: Need to refactor moved this code to util.go
 func RemixArray(l int, r *rand.Rand) []int {
 
 	rangeValue := make([]int, l)
@@ -52,6 +54,7 @@ func RemixArray(l int, r *rand.Rand) []int {
 	return rangeValue
 }
 
+//create a aliem mobment movement check to check the operations is working properly or not
 func (sim *Simulation) AlienMovementSimulation(alien *_alien) error {
 
 	from, to, err := sim.MakeMoveToandForm(alien)
@@ -73,7 +76,10 @@ func (sim *Simulation) AlienMovementSimulation(alien *_alien) error {
 	return err
 }
 
-//Decide
+//This function would let the aliens decide where should the alien go.
+//if it is starting from no where, then it could be random city
+// if it already in the city and there is a connection to go from
+// to city to another then the alien makes the move
 func (sim *Simulation) MakeMoveToandForm(alien *_alien) (*_city, *_city, error) {
 
 	from := alien.city
@@ -97,6 +103,9 @@ func (sim *Simulation) MakeMoveToandForm(alien *_alien) (*_city, *_city, error) 
 
 }
 
+//check whether the city that alien is in already has a connected city or not
+//that means if there is a connected city to this then aline need to make a proper move
+// or start the process all over again
 func (sim *Simulation) NextConnectedCity(alien *_alien) *_city {
 
 	if !alien.AlienInvading() {
@@ -140,6 +149,7 @@ func (sim *Simulation) PickCityRandom() *_city {
 	return sim._world[keys[pick]]
 }
 
+//check alien status if it is trapped or dead!
 func AlienStatus(alien *_alien) *AlienMovingStatusError {
 
 	if alien.AlienDead() {
@@ -152,10 +162,12 @@ func AlienStatus(alien *_alien) *AlienMovingStatusError {
 
 }
 
+// Check if the alien is dead or not used in AlienStatus
 func (alien *_alien) AlienDead() bool {
 	return alien.Flags[_dead]
 }
 
+// Check if the alien is trapped or not used in AlienStatus
 func (alien *Alien) AlienTrapped() bool {
 	if !alien.AlienInvading() {
 		return false
@@ -169,14 +181,17 @@ func (alien *Alien) AlienTrapped() bool {
 	return true
 }
 
+//check whether is Alien is Invading or not
 func (alien *_alien) AlienInvading() bool {
 	return alien.Node != nil
 }
 
+//check whether the city is destroyed or not
 func (city *City) CityDestroyed() bool {
 	return city.Flags[_destroyed]
 }
 
+//function use to destroy city
 func (city *City) DestroyCity() {
 	city.Flags[_destroyed] = true
 }
