@@ -8,6 +8,7 @@ import (
 	"time"
 )
 
+//Creates Random Aliens used thorughout the invasion
 func CreateRandomAliens(n int, r *rand.Rand) []*Alien {
 
 	aliensList := make([]*Alien, n)
@@ -20,6 +21,7 @@ func CreateRandomAliens(n int, r *rand.Rand) []*Alien {
 	return aliensList
 }
 
+//Create new alien also put a var so that there status could be monitered
 func CreateNewAlien(name string) Alien {
 
 	return Alien{
@@ -28,6 +30,7 @@ func CreateNewAlien(name string) Alien {
 	}
 }
 
+//function used to create New alien from the file
 func NameAliensFromFile(aliens []*Alien, file string) error {
 
 	f, err := os.Open(file)
@@ -45,6 +48,8 @@ func NameAliensFromFile(aliens []*Alien, file string) error {
 	return nil
 }
 
+//Create a randmoness for attacking the aliens in such a way
+//that it impliments determinism used Unix time style to do so.
 func CreateAttackingAliens() *rand.Rand {
 
 	seed := time.Now().UnixNano()
@@ -53,6 +58,8 @@ func CreateAttackingAliens() *rand.Rand {
 	return randomNumberSource
 }
 
+// function used to create a variable that is used to initiate a new simulator
+// whenever a function is called for.
 func IntiateNewSimulation(r *rand.Rand, lastItteration int, world _world, numberOfAlien _aliens) Simulation {
 
 	return Simulation{
