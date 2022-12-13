@@ -9,7 +9,7 @@ import (
 
 //ReadAndMakeWorldMap function reads the city file and create links between
 //the city so that it could create a world for aliens to Invade
-func ReadAndMakeWorldMap(file string) (_world, _cityTxtFile, error) {
+func ReadAndMakeWorldMap(file string) (_world, _cityMapFile, error) {
 
 	readableFile, err := os.Open(file)
 	if err != nil {
@@ -23,7 +23,7 @@ func ReadAndMakeWorldMap(file string) (_world, _cityTxtFile, error) {
 	scanner.Split(bufio.ScanLines)
 
 	worlds := make(_world)
-	textInput := make(_cityTxtFile, 0)
+	textInput := make(_cityMapFile, 0)
 
 	for scanner.Scan() {
 		//break the file into sentences

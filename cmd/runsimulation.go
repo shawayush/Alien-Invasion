@@ -246,3 +246,23 @@ func (w _world) String() string {
 	}
 	return str
 }
+
+func (city *City) String() string {
+
+	var links string
+	for _, link := range city.Links {
+		newcity := city.Nodes[link.Key]
+		otherCity := City{Node: *newcity}
+
+		if otherCity.CityDestroyed() {
+			continue
+		}
+
+		links += fmt.Sprintf("%s=%s ", city.RoadsName[link.Key], otherCity.Name)
+	}
+
+	if len(links) == 0 {
+		return city.Name
+	}
+	return fmt.Sprintf("%s %s", city.Name, links[:len(links)-1])
+}

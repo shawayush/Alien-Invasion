@@ -30,15 +30,14 @@ func Execute() {
 	//writng logic for taking the files input then mapping into the world simulation
 	//take the input from the file, parse it --> parse the map, (Like connecting the nodes)
 	// build the city with nodes, connecting Noth, East, West, South
-
-	createdWorld, inputfile, err := cmd.ReadAndMakeWorldMap(_cityTxtFile)
+	createdCity, inputFile, err := cmd.ReadAndMakeWorldMap(_cityTxtFile)
 	if err != nil {
 		fmt.Errorf("Error while reading city Input File ", err)
 		os.Exit(1)
 	}
+
 	// writing a logic for building a simulatior
 	//use random from to create itterations both random numbers and random alines
-
 	CreateAttackingAliens := cmd.CreateAttackingAliens()
 	attackingAliens := cmd.CreateRandomAliens(_numberOfAliens, CreateAttackingAliens)
 
@@ -49,32 +48,29 @@ func Execute() {
 		}
 	}
 
-	startSimulation := cmd.IntiateNewSimulation(CreateAttackingAliens, _iterationsInput, createdWorld, attackingAliens)
+	startSimulation := cmd.IntiateNewSimulation(CreateAttackingAliens, _iterationsInput, createdCity, attackingAliens) //start simulation
 
-	/*
-		//run the simultion
-			//create a loop for itteration
-			//make the alines shuffle
-				//create another loop
-				//make alien moves
-				//delete if the city is destroyed
-				//add a checker if the simulation completes before
-				//
-
-
-	*/
-
+	//run the simultion
+	//create a loop for itteration
+	//make the alines shuffle
+	//create another loop
+	//make alien moves
+	//delete if the city is destroyed
+	//add a checker if the simulation completes before
 	if err := startSimulation.RunSimulation(); err != nil {
 		fmt.Errorf("Error while running simulation: ", err)
 		os.Exit(1)
 	}
 
 	fmt.Println("Simulation Success!")
+
 	//print the city remainig
-	fmt.Println(inputfile.FilterCitiesDestroyed(createdWorld))
+	fmt.Println(inputFile.FilterCitiesDestroyed(createdCity))
 
 }
 
+//Initilaize the clie parameters need to be given
+//could be used to after using go.main.go -hepl
 func init() {
 
 	flag.IntVar(&_iterationsInput, "iterations", _itterations, "number of iterations to simulate")
@@ -85,6 +81,8 @@ func init() {
 
 }
 
+//func for checking the if the inputs in the cli
+//is right or not!
 func CheckCliInputs() error {
 
 	if _numberOfAliens <= 0 {
