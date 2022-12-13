@@ -180,3 +180,54 @@ func (city *City) CityDestroyed() bool {
 func (city *City) DestroyCity() {
 	city.Flags[_destroyed] = true
 }
+
+func (cityMapFile _cityMapFile) FilterCitiesDestroyed(cities _world) _cityMapFile {
+
+	cityOutput := make(_cityTxtFile, 0, len(cityMapFile))
+	checkCityStatus := make(map[string]bool)
+
+	for _, city := range cityMapFile {
+
+		if checkCityStatus[city.Name] {
+			continue
+		}
+
+		if !city.CityDestroyed() {
+			cityOutput = append(cityOutput, city)
+			checkCityStatus[city.Name] = true
+			continue
+		}
+
+		for _, link := range city.Links {
+			new := city.Nodes[link.Key]
+			differentCity := cities[new.Name]
+			if checkCityStatus[differentCity.Name] || differentCity.CityDestroyed() {
+				continue
+			}
+
+			cityOutput = append(cityOutput, differentCity)
+			checkCityStatus[differentCity.Name] = true
+		}
+	}
+	return _cityMapFile(cityOutput)
+}
+
+func (in _cityMapFile) String() string {
+	var str string
+	for _, city := range in {
+		if city.CityDestroyed() {
+			continue //city destroyed, so required no action
+		}
+
+		str += fmt.Sprintf("%s\n", city) //city is there need to give the name
+	}
+	return str
+}
+
+func (w _world) String() string {
+	var str string
+	for _, city := range w {
+		str += fmt.Sprintf("%s\n", city)
+	}
+	return str
+}

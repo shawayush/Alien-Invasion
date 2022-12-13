@@ -49,17 +49,21 @@ func ReadAndMakeWorldMap(file string) (_world, _cityTxtFile, error) {
 
 }
 func (n *Node) ConnectTwoCities(other *Node) *Link {
+
 	link := FormLinkBetweenCities(n.Name, other.Name)
 	return n.ConnectRoad(&link, other)
+
 }
 
 func FormLinkBetweenCities(nodes ...string) Link {
+
 	sort.Strings(nodes)
 	key := strings.Join(nodes, "_")
 	return Link{key, nodes}
 }
 
 func (n *Node) ConnectRoad(link *Link, other *Node) *Link {
+
 	if n.Nodes[link.Key] == nil {
 		n.Links = append(n.Links, link)
 		n.Nodes[link.Key] = other
@@ -78,8 +82,8 @@ func (w _world) AddNewCity(name string) *City {
 
 	return w.AddCity(City{
 		Node: Node{
-			Name:  name,
-			Links: make([]*Link, 0),
+			Name: name,
+			//Links: make([]*Link, 0),
 			Nodes: make(map[string]*Node),
 		},
 		RoadsName: make(map[string]string),

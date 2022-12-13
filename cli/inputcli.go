@@ -65,11 +65,14 @@ func Execute() {
 	*/
 
 	if err := startSimulation.RunSimulation(); err != nil {
-		fmt.Println("Error while running simulation: ", err)
+		fmt.Errorf("Error while running simulation: ", err)
+		os.Exit(1)
 	}
 
+	fmt.Println("Simulation Success!")
 	//print the city remainig
-	fmt.Println(inputfile)
+	fmt.Println(inputfile.FilterCitiesDestroyed(createdWorld))
+
 }
 
 func init() {

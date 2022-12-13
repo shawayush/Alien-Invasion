@@ -8,12 +8,18 @@ var _directions = map[string]string{
 }
 
 const (
-	_numberOfRandonAlien int               = 10
-	_dead                string            = "dead"
-	_deadAlien           AlienMovingStatus = iota
+	_numberOfRandonAlien int = 10
+
+	_dead string = "dead"
+
+	_deadAlien AlienMovingStatus = iota
+
 	_alienTrapped
+
 	_cityDistroyed
+
 	_destroyed string = "destroyed"
+
 	_operation string = "stopped"
 )
 
@@ -31,4 +37,6 @@ type (
 	_alien = Alien
 
 	_city = City
+
+	_cityMapFile []*_city
 )
