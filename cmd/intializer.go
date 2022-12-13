@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"sort"
 	"strings"
@@ -35,6 +36,7 @@ func ReadAndMakeWorldMap(file string) (_world, _cityMapFile, error) {
 			road, city := BuildLink(words)
 			//checks if there is other city is connected well enough or not
 			otherCity, Cityexists := worlds[city]
+			fmt.Println("")
 			if !Cityexists {
 				otherCity = worlds.AddNewCity(city)
 			}
@@ -90,14 +92,15 @@ func BuildLink(words string) (string, string) {
 	return road, connectingCity
 }
 
-//Creates a greaph like strucutre for adding the city in the worldmap
+//Creates a graph like strucutre for adding the city in the worldmap
 func (w _world) AddNewCity(name string) *City {
 
 	return w.AddCity(City{
 		Node: Node{
-			Name: name,
-			//Links: make([]*Link, 0),
+			Name:  name,
+			Links: make([]*Link, 0),
 			Nodes: make(map[string]*Node),
+			Flags: make(map[string]bool),
 		},
 		RoadsName: make(map[string]string),
 	})
@@ -109,3 +112,19 @@ func (w _world) AddCity(city City) *City {
 	w[city.Name] = &city
 	return &city
 }
+
+// // String representation for a Node
+// func (n *Node) String() string {
+// 	var links string
+// 	for k, n := range n.Nodes {
+// 		links += fmt.Sprintf("%s:%s ", k, n.Name)
+// 	}
+// 	if len(n.Nodes) > 0 {
+// 		links = links[:len(links)-1]
+// 	}
+// 	return fmt.Sprintf("name=%s links=map[%s]", n.Name, links)
+// }
+
+// func (l Link) String() string {
+// 	return fmt.Sprintf("key=%s nodes=%s\n", l.Key, l.Nodes)
+// }

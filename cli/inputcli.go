@@ -14,10 +14,10 @@ var (
 )
 
 const (
-	_aliens        int = 10    // using 10 Aleins if not specified
-	_itterations   int = 10000 // using 10000 itterations as specified (or) could input yours if required
-	_cityTxtFile       = "./test/ex.txt"
-	_alienNameFile     = "./test/"
+	_aliens        int = 10 // using 10 Aleins if not specified
+	_itterations   int = 10 // using 10000 itterations as specified (or) could input yours if required
+	_cityTxtFile       = "./test/example.txt"
+	_alienNameFile     = "./test/aliens.txt"
 )
 
 func Execute() {
@@ -70,7 +70,7 @@ func Execute() {
 }
 
 //Initilaize the clie parameters need to be given
-//could be used to after using go.main.go -hepl
+//could be used to after using go.main.go -help
 func init() {
 
 	flag.IntVar(&_iterationsInput, "iterations", _itterations, "number of iterations to simulate")
