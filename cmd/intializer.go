@@ -7,6 +7,8 @@ import (
 	"strings"
 )
 
+//ReadAndMakeWorldMap function reads the city file and create links between
+//the city so that it could create a world for aliens to Invade
 func ReadAndMakeWorldMap(file string) (_world, _cityTxtFile, error) {
 
 	readableFile, err := os.Open(file)
@@ -24,12 +26,14 @@ func ReadAndMakeWorldMap(file string) (_world, _cityTxtFile, error) {
 	textInput := make(_cityTxtFile, 0)
 
 	for scanner.Scan() {
+		//break the file into sentences
 		sentences := strings.Split(scanner.Text(), " ")
+		//pick city for
 		cities := worlds.AddNewCity(sentences[0])
-
+		//start building raods/links that is need to used throughout
 		for _, words := range sentences[1:] {
 			road, city := BuildLink(words)
-
+			//checks if there is other city is connected well enough or not
 			otherCity, Cityexists := worlds[city]
 			if !Cityexists {
 				otherCity = worlds.AddNewCity(city)
@@ -48,6 +52,8 @@ func ReadAndMakeWorldMap(file string) (_world, _cityTxtFile, error) {
 	return worlds, textInput, nil
 
 }
+
+//Makes connection between two cities
 func (n *Node) ConnectTwoCities(other *Node) *Link {
 
 	link := FormLinkBetweenCities(n.Name, other.Name)
@@ -55,6 +61,8 @@ func (n *Node) ConnectTwoCities(other *Node) *Link {
 
 }
 
+//used in ConnectTwoCities function. This function helps to create
+//link between two cities or nodes
 func FormLinkBetweenCities(nodes ...string) Link {
 
 	sort.Strings(nodes)
@@ -62,6 +70,7 @@ func FormLinkBetweenCities(nodes ...string) Link {
 	return Link{key, nodes}
 }
 
+//connect one city through a path/road
 func (n *Node) ConnectRoad(link *Link, other *Node) *Link {
 
 	if n.Nodes[link.Key] == nil {
@@ -71,6 +80,9 @@ func (n *Node) ConnectRoad(link *Link, other *Node) *Link {
 	return link
 }
 
+//Read the input from the file that it could be used to create
+//takes the input from the file, make connections as required by the
+// inputs given
 func BuildLink(words string) (string, string) {
 
 	word := strings.Split(words, "=")
@@ -78,6 +90,7 @@ func BuildLink(words string) (string, string) {
 	return road, connectingCity
 }
 
+//Creates a greaph like strucutre for adding the city in the worldmap
 func (w _world) AddNewCity(name string) *City {
 
 	return w.AddCity(City{
@@ -90,6 +103,7 @@ func (w _world) AddNewCity(name string) *City {
 	})
 }
 
+//function used in AddNewCity for adding city the strucutre that has been created
 func (w _world) AddCity(city City) *City {
 
 	w[city.Name] = &city
