@@ -5,6 +5,7 @@ import (
 	"sort"
 )
 
+//a  driver function that is used to start the simulation
 func (sim *Simulation) RunSimulation() error {
 
 	fmt.Println("------Simulation has begun Running, buckle up Earth------")
@@ -14,18 +15,20 @@ func (sim *Simulation) RunSimulation() error {
 		fmt.Println(" Itteration number: ", sim.Iteration+1)
 
 		picks := LenghtMix(len(sim._aliens), sim.R)
-
+		//additional checks for if simulation ends early!
 		alienMakeMoves := true
 
 		for _, pick := range picks {
 			if err := sim.AlienMovementSimulation(sim._aliens[pick]); err != nil {
 				if _, okay := err.(*AlienMovingStatusError); okay {
+					//checks for error,if everything going well or not
 					continue
 				}
 				return err
 			}
 			alienMakeMoves = false
 		}
+		//check for itterations eneded early
 		if alienMakeMoves {
 			fmt.Println("Simulation Ended Early at : ", sim.Iteration+1)
 			return nil
@@ -38,9 +41,10 @@ func (sim *Simulation) RunSimulation() error {
 func (sim *Simulation) AlienMovementSimulation(alien *_alien) error {
 	fmt.Println("Alien Name: ", alien.Name)
 	from, to, err := sim.MakeMoveToandForm(alien)
-	fmt.Println(" Moving Alien: ", alien.Name)
+	fmt.Println("Moving Alien: ", alien.Name)
 	fmt.Println("to: ", to)
 	fmt.Println("from: ", from)
+	//check for operations that is city is destroyed or not /alien is trapped or not/ alien dead or not
 	if err != nil {
 		if operation, okay := err.(*AlienMovingStatusError); okay {
 			switch operation.reason {
@@ -54,6 +58,7 @@ func (sim *Simulation) AlienMovementSimulation(alien *_alien) error {
 		}
 		return err
 	}
+	//start invading
 	alien.InvadeCity(to)
 
 	if from != nil {
@@ -165,6 +170,8 @@ func AlienStatus(alien *_alien) *AlienMovingStatusError {
 
 }
 
+//---------------Aliens actions---------------------
+
 // Check if the alien is dead or not used in AlienStatus
 func (alien *Alien) AlienDead() bool {
 
@@ -175,6 +182,7 @@ func (alien *Alien) AlienCity() *City {
 	return alien.city
 }
 
+//function for alien to invade the city
 func (alien *Alien) InvadeCity(city *City) {
 
 	alien.Node = &city.Node
@@ -205,6 +213,14 @@ func (alien *Alien) AlienInvading() bool {
 	return alien.Node != nil
 }
 
+//this function is used so that propoer formating for both Alien and
+//city could come to the proper format
+func (alien *Alien) String() string {
+	return fmt.Sprintf("name=%s city={%s}\n", alien.Name, alien.city)
+}
+
+//---------------city actions---------------------
+
 //check whether the city is destroyed or not
 func (city *City) CityDestroyed() bool {
 	return city.Flags[_destroyed]
@@ -215,21 +231,44 @@ func (city *City) DestroyCity() {
 	city.Flags[_destroyed] = true
 }
 
-func (alien *Alien) String() string {
-	return fmt.Sprintf("name=%s city={%s}\n", alien.Name, alien.city)
+//used to print the city in proper format
+func (city *City) String() string {
+
+	var links string
+	for _, link := range city.Links {
+		newcity := city.Nodes[link.Key]
+		otherCity := City{Node: *newcity}
+
+		if otherCity.CityDestroyed() {
+			continue
+		}
+
+		links += fmt.Sprintf("%s=%s ", city.RoadsName[link.Key], otherCity.Name)
+	}
+
+	if len(links) == 0 {
+		return city.Name
+	}
+	return fmt.Sprintf("%s %s", city.Name, links[:len(links)-1])
 }
 
+//---------------cityMapFile actions---------------------
+
+//this function is used to filter all the ciities that has been destroyed when the
+//aliens are invading. This function basically checks the cities functions and
+// check the status CITYDESTROYED or not, if everything is ok, then filter out the
+//function that could be used to check in the final ouput
 func (cityMapFile _cityMapFile) FilterCitiesDestroyed(cities _world) _cityMapFile {
 
 	cityOutput := make(_cityTxtFile, 0, len(cityMapFile))
 	checkCityStatus := make(map[string]bool)
-
+	//itteration through all the city in the cityMapFile
 	for _, city := range cityMapFile {
 
 		if checkCityStatus[city.Name] {
 			continue
 		}
-
+		//checking status and assigning the value
 		if !city.CityDestroyed() {
 			cityOutput = append(cityOutput, city)
 			checkCityStatus[city.Name] = true
@@ -250,9 +289,10 @@ func (cityMapFile _cityMapFile) FilterCitiesDestroyed(cities _world) _cityMapFil
 	return _cityMapFile(cityOutput)
 }
 
-func (in _cityMapFile) String() string {
+// get the string for citymapfile
+func (cityMapFile _cityMapFile) String() string {
 	var str string
-	for _, city := range in {
+	for _, city := range cityMapFile {
 		if city.CityDestroyed() {
 			continue //city destroyed, so required no action
 		}
@@ -262,30 +302,18 @@ func (in _cityMapFile) String() string {
 	return str
 }
 
-func (w _world) String() string {
+//--------------------------------------------------------------
+
+//this function put the formating in the string world
+func (world _world) String() string {
 	var str string
-	for _, city := range w {
+	for _, city := range world {
 		str += fmt.Sprintf("%s\n", city)
 	}
 	return str
 }
 
-func (city *City) String() string {
-
-	var links string
-	for _, link := range city.Links {
-		newcity := city.Nodes[link.Key]
-		otherCity := City{Node: *newcity}
-
-		if otherCity.CityDestroyed() {
-			continue
-		}
-
-		links += fmt.Sprintf("%s=%s ", city.RoadsName[link.Key], otherCity.Name)
-	}
-
-	if len(links) == 0 {
-		return city.Name
-	}
-	return fmt.Sprintf("%s %s", city.Name, links[:len(links)-1])
+//used to check and print for the city that is not destroyed
+func (err *AlienMovingStatusError) Error() string {
+	return fmt.Sprintf("Simulator stopped as :", err.reason)
 }
