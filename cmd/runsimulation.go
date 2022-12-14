@@ -15,8 +15,6 @@ func (sim *Simulation) RunSimulation() error {
 
 		picks := LenghtMix(len(sim._aliens), sim.R)
 
-		fmt.Println("Checkig for picks: ", picks)
-
 		alienMakeMoves := true
 
 		for _, pick := range picks {
@@ -69,7 +67,6 @@ func (sim *Simulation) AlienMovementSimulation(alien *_alien) error {
 	sim._defense[to.Name][alien.Name] = alien
 
 	if len(sim._defense[to.Name]) > 1 {
-		fmt.Println("checking to---->", to)
 		to.DestroyCity()
 
 		output := fmt.Sprintf(" %s has been destroyed by ", to.Name)
@@ -170,18 +167,22 @@ func AlienStatus(alien *_alien) *AlienMovingStatusError {
 
 // Check if the alien is dead or not used in AlienStatus
 func (alien *Alien) AlienDead() bool {
+
 	return alien.Flags[_dead]
 }
 func (alien *Alien) AlienCity() *City {
+
 	return alien.city
 }
 
 func (alien *Alien) InvadeCity(city *City) {
+
 	alien.Node = &city.Node
 	alien.city = city
 }
 
 func (a *Alien) Kill() {
+
 	a.Flags[_dead] = true
 }
 
