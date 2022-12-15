@@ -1,0 +1,265 @@
+ayush@Shaw-PC:~/Music/Alien-Invasion$ go run main.go -city examplecli.txt -iterations 3 -aliens 30
+-------------------Aliens are Invading-------------------
+
+
+
+
+
+
+
+
+
+
+
+------Simulation has begun Running, buckle up Earth------
+
+ _____Itteration number: 1 _____
+Moving Alien:  Santa   
+to:  Bee east=Bombay
+from:  <nil>
+Moving Alien:  dome
+to:  Yee south=Darjeeling
+from:  <nil>
+Moving Alien:  dahej
+to:  Bombay south=Delhi west=Bee north=Darjeeling
+from:  <nil>
+Moving Alien:  chiting
+to:  Bengal south=Ooo
+from:  <nil>
+Moving Alien:  donosari    
+to:  Mee north=Bengaluru west=Bengal
+from:  <nil>
+Moving Alien:  Madi
+to:  Ooo north=Bengal
+from:  <nil>
+Moving Alien:  Madi
+to:  Qu-ux north=Delhi
+from:  <nil>
+Moving Alien:  Taksehi 
+to:  Delhi north=Bombay west=Brahams south=Qu-ux
+from:  <nil>
+Moving Alien:  loki
+to:  Ooo north=Bengal
+from:  <nil>
+Ooo has been destroyed by alien loki and alien Madi!
+
+Moving Alien:  Banta
+to:  Brahams east=Delhi
+from:  <nil>
+Moving Alien:  Hirrok
+to:  Darjeeling north=Yee west=Loo
+from:  <nil>
+Moving Alien:  Catoo
+to:  Delhi north=Bombay west=Brahams south=Qu-ux
+from:  <nil>
+Delhi has been destroyed by alien Taksehi  and alien Catoo!
+
+Moving Alien:  Th'ios
+to:  Bengaluru south=Mee
+from:  <nil>
+Moving Alien:  S'jbn
+to:  Qu-ux
+from:  <nil>
+Qu-ux has been destroyed by alien Madi and alien S'jbn!
+
+Moving Alien:  Ssgmeqwr
+to:  Loo east=Darjeeling
+from:  <nil>
+Moving Alien:  ladlo
+to:  Bombay west=Bee north=Darjeeling
+from:  <nil>
+Bombay has been destroyed by alien dahej and alien ladlo!
+
+Moving Alien:  chat chat
+to:  Yee south=Darjeeling
+from:  <nil>
+Yee has been destroyed by alien dome and alien chat chat!
+
+Moving Alien:  zek
+to:  Brahams
+from:  <nil>
+Brahams has been destroyed by alien Banta and alien zek!
+
+Moving Alien:  ber
+to:  Bee
+from:  <nil>
+Bee has been destroyed by alien Santa    and alien ber!
+
+Moving Alien:  Cheesing k asw
+to:  Mee north=Bengaluru west=Bengal
+from:  <nil>
+Mee has been destroyed by alien donosari     and alien Cheesing k asw!
+
+Moving Alien:  lambu
+to:  Bengal
+from:  <nil>
+Bengal has been destroyed by alien chiting and alien lambu!
+
+Moving Alien:  Tiktm
+to:  Bengaluru
+from:  <nil>
+Bengaluru has been destroyed by alien Th'ios and alien Tiktm!
+
+Moving Alien:  sari
+to:  Darjeeling west=Loo
+from:  <nil>
+Darjeeling has been destroyed by alien sari and alien Hirrok!
+
+Moving Alien:  Manta   
+to:  Loo
+from:  <nil>
+Loo has been destroyed by alien Ssgmeqwr and alien Manta   !
+
+Moving Alien:  tori
+to:  <nil>
+from:  <nil>
+<Process stopped>  All Cities been destroyed!
+Moving Alien:  Rosh
+to:  <nil>
+from:  <nil>
+<Process stopped>  All Cities been destroyed!
+Moving Alien:  tchalla
+to:  <nil>
+from:  <nil>
+<Process stopped>  All Cities been destroyed!
+Moving Alien:  gh'anta
+to:  <nil>
+from:  <nil>
+<Process stopped>  All Cities been destroyed!
+Moving Alien:  Tnlqw
+to:  <nil>
+from:  <nil>
+<Process stopped>  All Cities been destroyed!
+Moving Alien:  gothila
+to:  <nil>
+from:  <nil>
+<Process stopped>  All Cities been destroyed!
+
+ _____Itteration number: 2 _____
+Moving Alien:  Cheesing k asw
+to:  <nil>
+from:  Mee west=Bengal
+<Process stopped>  Alien is dead
+Moving Alien:  donosari    
+to:  <nil>
+from:  Mee west=Bengal
+<Process stopped>  Alien is dead
+Moving Alien:  Tiktm
+to:  <nil>
+from:  Bengaluru
+<Process stopped>  Alien is dead
+Moving Alien:  tchalla
+to:  <nil>
+from:  <nil>
+<Process stopped>  All Cities been destroyed!
+Moving Alien:  gh'anta
+to:  <nil>
+from:  <nil>
+<Process stopped>  All Cities been destroyed!
+Moving Alien:  sari
+to:  <nil>
+from:  Darjeeling
+<Process stopped>  Alien is dead
+Moving Alien:  chiting
+to:  <nil>
+from:  Bengal
+<Process stopped>  Alien is dead
+Moving Alien:  Ssgmeqwr
+to:  <nil>
+from:  Loo
+<Process stopped>  Alien is dead
+Moving Alien:  chat chat
+to:  <nil>
+from:  Yee
+<Process stopped>  Alien is dead
+Moving Alien:  Rosh
+to:  <nil>
+from:  <nil>
+<Process stopped>  All Cities been destroyed!
+Moving Alien:  gothila
+to:  <nil>
+from:  <nil>
+<Process stopped>  All Cities been destroyed!
+Moving Alien:  loki
+to:  <nil>
+from:  Ooo
+<Process stopped>  Alien is dead
+Moving Alien:  Santa   
+to:  <nil>
+from:  Bee
+<Process stopped>  Alien is dead
+Moving Alien:  Madi
+to:  <nil>
+from:  Ooo
+<Process stopped>  Alien is dead
+Moving Alien:  tori
+to:  <nil>
+from:  <nil>
+<Process stopped>  All Cities been destroyed!
+Moving Alien:  S'jbn
+to:  <nil>
+from:  Qu-ux
+<Process stopped>  Alien is dead
+Moving Alien:  Banta
+to:  <nil>
+from:  Brahams
+<Process stopped>  Alien is dead
+Moving Alien:  Madi
+to:  <nil>
+from:  Qu-ux
+<Process stopped>  Alien is dead
+Moving Alien:  Hirrok
+to:  <nil>
+from:  Darjeeling
+<Process stopped>  Alien is dead
+Moving Alien:  dome
+to:  <nil>
+from:  Yee
+<Process stopped>  Alien is dead
+Moving Alien:  lambu
+to:  <nil>
+from:  Bengal
+<Process stopped>  Alien is dead
+Moving Alien:  ladlo
+to:  <nil>
+from:  Bombay north=Darjeeling
+<Process stopped>  Alien is dead
+Moving Alien:  zek
+to:  <nil>
+from:  Brahams
+<Process stopped>  Alien is dead
+Moving Alien:  Manta   
+to:  <nil>
+from:  Loo
+<Process stopped>  Alien is dead
+Moving Alien:  Taksehi 
+to:  <nil>
+from:  Delhi north=Bombay
+<Process stopped>  Alien is dead
+Moving Alien:  Th'ios
+to:  <nil>
+from:  Bengaluru
+<Process stopped>  Alien is dead
+Moving Alien:  Tnlqw
+to:  <nil>
+from:  <nil>
+<Process stopped>  All Cities been destroyed!
+Moving Alien:  dahej
+to:  <nil>
+from:  Bombay north=Darjeeling
+<Process stopped>  Alien is dead
+Moving Alien:  ber
+to:  <nil>
+from:  Bee
+<Process stopped>  Alien is dead
+Moving Alien:  Catoo
+to:  <nil>
+from:  Delhi north=Bombay
+<Process stopped>  Alien is dead
+Simulation Ended Early at :  2
+
+<><><><><><><><><> SIMULATION SUCCESS! <><><><><><><><><>
+
+Earth has been destroyed :((
+ayush@Shaw-PC:~/Music/Alien-Invasion$ ^C
+ayush@Shaw-PC:~/Music/Alien-Invasion$ 
