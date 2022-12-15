@@ -21,7 +21,7 @@ func CreateRandomAliens(n int, r *rand.Rand) []*Alien {
 	return aliensList
 }
 
-//Create new alien also put a var so that there status could be monitered
+//Create new alien also put a var(status) so that there status could be monitered
 func CreateNewAlien(name string) Alien {
 
 	return Alien{
@@ -30,7 +30,7 @@ func CreateNewAlien(name string) Alien {
 	}
 }
 
-//function used to create New alien from the file
+//function used to get alien name from the file
 func NameAliensFromFile(aliens []*Alien, file string) error {
 
 	f, err := os.Open(file)
@@ -48,8 +48,8 @@ func NameAliensFromFile(aliens []*Alien, file string) error {
 	return nil
 }
 
-//Create a randmoness for attacking the aliens in such a way
-//that it impliments determinism used Unix time style to do so.
+//Create a randmoness of n number of string so that it
+//could be used for aliens that is not named
 func CreateAttackingAliens() *rand.Rand {
 
 	seed := time.Now().UnixNano()
@@ -60,12 +60,12 @@ func CreateAttackingAliens() *rand.Rand {
 
 // function used to create a variable that is used to initiate a new simulator
 // whenever a function is called for.
-func IntiateNewSimulation(r *rand.Rand, lastItteration int, world _world, numberOfAlien _aliens) Simulation {
+func IntiateNewSimulation(r *rand.Rand, lastIteration int, world _world, numberOfAlien _aliens) Simulation {
 
 	return Simulation{
 		R:            r,
 		Iteration:    0,
-		EndIteration: lastItteration,
+		EndIteration: lastIteration,
 		_world:       world,
 		_aliens:      numberOfAlien,
 		_defense:     make(_defense),

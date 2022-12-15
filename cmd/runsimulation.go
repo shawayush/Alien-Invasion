@@ -13,7 +13,7 @@ func (sim *Simulation) RunSimulation() error {
 	fmt.Println("------Simulation has begun Running, buckle up Earth------")
 
 	for ; sim.Iteration < sim.EndIteration; sim.Iteration++ {
-		fmt.Println("\n _____Itteration number:", sim.Iteration+1, "_____")
+		fmt.Println("\n _____Iteration number:", sim.Iteration+1, "_____")
 
 		picks := LenghtMix(len(sim._aliens), sim.R)
 

@@ -15,7 +15,7 @@ var (
 
 const (
 	_aliens        int = 10    // using 10 Aleins if not specified
-	_itterations   int = 10000 // using 10000 itterations as specified (or) could input yours if required
+	_iterations    int = 10000 // using 10000 iterations as specified (or) could input yours if required
 	_cityTxtFile       = "./test/example4.txt"
 	_alienNameFile     = "./test/aliens.txt"
 )
@@ -39,9 +39,9 @@ func Execute() {
 	}
 
 	// writing a logic for building a simulatior
-	//use random from to create itterations both random numbers and random alines
+	//use random from to create iterations both random numbers and random alines
 	CreateAttackingAliens := cmd.CreateAttackingAliens()                              //creates random intigers of number to be used by the aliens
-	attackingAliens := cmd.CreateRandomAliens(_numberOfAliens, CreateAttackingAliens) //assign those values to the aliens, name provided in alien.txt file
+	attackingAliens := cmd.CreateRandomAliens(_numberOfAliens, CreateAttackingAliens) //assign those values to the aliens, name provided in alien.txt file for further aliens not named
 	if _alienNameFile != "" {
 		if err := cmd.NameAliensFromFile(attackingAliens, _alienNameFile); err != nil {
 			fmt.Println("Error while reading alien Input File ", err)
@@ -49,12 +49,12 @@ func Execute() {
 		}
 	}
 
-	//A variable used to initiate simulation, which creates a value for the itteration throughouts, where it could be stored and
+	//A variable used to initiate simulation, which creates a value for the iteration throughouts, where it could be stored and
 	//used to moniotr and definitely run the simulation in the required way as possible
 	startSimulation := cmd.IntiateNewSimulation(CreateAttackingAliens, _iterationsInput, createdCity, attackingAliens) //start simulation
 
 	//run the simultion
-	//create a loop for itteration
+	//create a loop for iteration
 	//make the alines shuffle
 	//create another loop
 	//make alien moves
@@ -82,7 +82,7 @@ func Execute() {
 //could be used to after using go.main.go -help
 func init() {
 
-	flag.IntVar(&_iterationsInput, "iterations", _itterations, "number of iterations to simulate")
+	flag.IntVar(&_iterationsInput, "iterations", _iterations, "number of iterations to simulate")
 	flag.IntVar(&_numberOfAliens, "aliens", _aliens, "number of aliens invading during an invasion")
 	flag.StringVar(&_inputCityTxtFile, "city", _cityTxtFile, "a file used as city input to make simulation")
 	flag.StringVar(&_inputalienNameFile, "Alien", _alienNameFile, "a file used to identify aliens")
