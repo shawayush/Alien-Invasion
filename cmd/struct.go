@@ -45,7 +45,7 @@ type Simulation struct {
 	_defense
 }
 
-//
+//gives the status of aliens
 type AlienMovingStatus uint8
 
 type AlienMovingStatusError struct {
