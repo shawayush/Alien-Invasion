@@ -1,9 +1,10 @@
 package cmd
 
 import (
-	"fmt"
 	"math/rand"
 )
+
+//--------------funcitons used for mixing arrays------------
 
 func Mix(vals []int, r *rand.Rand) {
 
@@ -29,9 +30,4 @@ func MakeRange(min, max int) []int {
 		vals[i] = min + i
 	}
 	return vals
-}
-
-//used to check and print for the city that is not destroyed
-func (err *AlienMovingStatusError) Error() string {
-	return fmt.Sprintf("Simulator stopped as :", err.reason)
 }

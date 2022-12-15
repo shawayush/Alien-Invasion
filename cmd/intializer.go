@@ -113,18 +113,18 @@ func (w _world) AddCity(city City) *City {
 	return &city
 }
 
-// // String representation for a Node
-// func (n *Node) String() string {
-// 	var links string
-// 	for k, n := range n.Nodes {
-// 		links += fmt.Sprintf("%s:%s ", k, n.Name)
-// 	}
-// 	if len(n.Nodes) > 0 {
-// 		links = links[:len(links)-1]
-// 	}
-// 	return fmt.Sprintf("name=%s links=map[%s]", n.Name, links)
-// }
+//  String representation for a Node
+func (n *Node) String() string {
+	var links string
+	for k, n := range n.Nodes {
+		links += fmt.Sprintf("%s:%s ", k, n.Name)
+	}
+	if len(n.Nodes) > 0 {
+		links = links[:len(links)-1]
+	}
+	return fmt.Sprintf("name=%s links=map[%s]", n.Name, links)
+}
 
-// func (l Link) String() string {
-// 	return fmt.Sprintf("key=%s nodes=%s\n", l.Key, l.Nodes)
-// }
+func (l Link) String() string {
+	return fmt.Sprintf("key=%s nodes=%s\n", l.Key, l.Nodes)
+}

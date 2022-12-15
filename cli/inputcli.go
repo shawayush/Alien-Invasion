@@ -14,9 +14,9 @@ var (
 )
 
 const (
-	_aliens        int = 10 // using 10 Aleins if not specified
-	_itterations   int = 10 // using 10000 itterations as specified (or) could input yours if required
-	_cityTxtFile       = "./test/example.txt"
+	_aliens        int = 10    // using 10 Aleins if not specified
+	_itterations   int = 10000 // using 10000 itterations as specified (or) could input yours if required
+	_cityTxtFile       = "./test/example_2.txt"
 	_alienNameFile     = "./test/aliens.txt"
 )
 
@@ -38,9 +38,8 @@ func Execute() {
 
 	// writing a logic for building a simulatior
 	//use random from to create itterations both random numbers and random alines
-	CreateAttackingAliens := cmd.CreateAttackingAliens()
-	attackingAliens := cmd.CreateRandomAliens(_numberOfAliens, CreateAttackingAliens)
-
+	CreateAttackingAliens := cmd.CreateAttackingAliens()                              //creates random intigers of number to be used by the aliens
+	attackingAliens := cmd.CreateRandomAliens(_numberOfAliens, CreateAttackingAliens) //assign those values to the aliens, name provided in alien.txt file
 	if _alienNameFile != "" {
 		if err := cmd.NameAliensFromFile(attackingAliens, _alienNameFile); err != nil {
 			fmt.Errorf("Error while reading alien Input File ", err)
@@ -48,6 +47,8 @@ func Execute() {
 		}
 	}
 
+	//A variable used to initiate simulation, which creates a value for the itteration throughouts, where it could be stored and
+	//used to moniotr and definitely run the simulation in the required way as possible
 	startSimulation := cmd.IntiateNewSimulation(CreateAttackingAliens, _iterationsInput, createdCity, attackingAliens) //start simulation
 
 	//run the simultion
@@ -62,14 +63,20 @@ func Execute() {
 		os.Exit(1)
 	}
 
-	fmt.Println("Simulation Success!")
+	fmt.Println("\n<><><><><><><><><> SIMULATION SUCCESS! <><><><><><><><><>")
 
 	//print the city remainig
-	fmt.Println(inputFile.FilterCitiesDestroyed(createdCity))
+	remainingCity := inputFile.FilterCitiesDestroyed(createdCity)
+	if len(remainingCity) != 0 {
+		fmt.Println("\nEarth has been hanging there :) Remaining Cities are: ")
+		fmt.Println(remainingCity)
+	} else {
+		fmt.Println("\nEarth has been destroyed :((")
+	}
 
 }
 
-//Initilaize the clie parameters need to be given
+//Initilaize the cli parameters need to be given
 //could be used to after using go.main.go -help
 func init() {
 

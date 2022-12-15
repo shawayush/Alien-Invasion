@@ -12,11 +12,11 @@ import (
 func CreateRandomAliens(n int, r *rand.Rand) []*Alien {
 
 	aliensList := make([]*Alien, n)
+
 	for i := 0; i < n; i++ {
-		name := strconv.Itoa(r.Int())[:_numberOfRandonAlien]
+		name := strconv.Itoa(r.Int())[:_numberOfRandomAlien]
 		alienNameAndAttributes := CreateNewAlien(name)
 		aliensList[i] = &alienNameAndAttributes
-
 	}
 	return aliensList
 }
