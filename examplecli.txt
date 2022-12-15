@@ -1,0 +1,5 @@
+Delhi north=Bombay west=Brahams south=Qu-ux
+Bombay south=Delhi west=Bee north=Darjeeling
+Darjeeling north=Yee west=Loo
+Mee north=Bengaluru west=Bengal
+Bengal south=Ooo

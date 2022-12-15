@@ -16,14 +16,15 @@ var (
 const (
 	_aliens        int = 10    // using 10 Aleins if not specified
 	_itterations   int = 10000 // using 10000 itterations as specified (or) could input yours if required
-	_cityTxtFile       = "./test/example_2.txt"
+	_cityTxtFile       = "./test/example4.txt"
 	_alienNameFile     = "./test/aliens.txt"
 )
 
 func Execute() {
 
 	if err := CheckCliInputs(); err != nil {
-		fmt.Errorf("Error while checking flags: %s\n", err)
+
+		fmt.Println("Error while checking flags: %s\n", err)
 		os.Exit(1)
 	}
 
@@ -32,7 +33,8 @@ func Execute() {
 	// build the city with nodes, connecting Noth, East, West, South
 	createdCity, inputFile, err := cmd.ReadAndMakeWorldMap(_cityTxtFile)
 	if err != nil {
-		fmt.Errorf("Error while reading city Input File ", err)
+		fmt.Println("checking")
+		fmt.Println("Error while reading city Input File ", err)
 		os.Exit(1)
 	}
 
@@ -42,7 +44,7 @@ func Execute() {
 	attackingAliens := cmd.CreateRandomAliens(_numberOfAliens, CreateAttackingAliens) //assign those values to the aliens, name provided in alien.txt file
 	if _alienNameFile != "" {
 		if err := cmd.NameAliensFromFile(attackingAliens, _alienNameFile); err != nil {
-			fmt.Errorf("Error while reading alien Input File ", err)
+			fmt.Println("Error while reading alien Input File ", err)
 			os.Exit(1)
 		}
 	}
@@ -82,7 +84,7 @@ func init() {
 
 	flag.IntVar(&_iterationsInput, "iterations", _itterations, "number of iterations to simulate")
 	flag.IntVar(&_numberOfAliens, "aliens", _aliens, "number of aliens invading during an invasion")
-	flag.StringVar(&_inputCityTxtFile, "world", _cityTxtFile, "a file used as world map input to make simulation")
+	flag.StringVar(&_inputCityTxtFile, "city", _cityTxtFile, "a file used as city input to make simulation")
 	flag.StringVar(&_inputalienNameFile, "Alien", _alienNameFile, "a file used to identify aliens")
 	flag.Parse()
 
