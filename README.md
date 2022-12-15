@@ -59,3 +59,5 @@ You could also use multiple inputs for controlling the simulation as:
 ```
 go run main.go -city examplecli.txt -iterations 3 -aliens 30
 ```
+
+Attached a [sample output](https://github.com/shawayush/Alien-Invasion/blob/main/sampleoutput.txt)
